@@ -1,66 +1,72 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+//using UnityEngine.UI;
 
 
 public class Player : MonoBehaviour
 {
-    public float speed;
-    public float jumpForce;
+    [SerializeField] private float speed =3f;
+    [SerializeField] private float jumpForce = 8f;
+    [SerializeField] private int lives = 5;
 
-    private bool isGrounded;
+    private bool isGrounded; 
     private Rigidbody2D rigidbody2D;
 
     private SpriteRenderer spriteRenderer;
     private Animator animator;
 
-    public int score;
-    public Text scoreText;
+    public static Player Instance { get; set; }
 
 
-    // Start is called before the first frame update
-    void Start()
+    //public int score;
+    //public Text scoreText;
+
+
+    private State state
+    {
+        get { return (State)animator.GetInteger("State"); }
+        set { animator.SetInteger("State", (int)value); }
+    }
+
+    private void Awake()
     {
         rigidbody2D = GetComponent<Rigidbody2D>();
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         animator = GetComponent<Animator>();
     }
 
-    // Update is called once per frame
-    void FixedUpdate()
+    private void FixedUpdate()
     {
+        CheckGround();
+    }
+
+
+    private void Update()
+    {
+       if (isGrounded) state = State.idlePlayer;
+
+        if (Input.GetButton("Horizontal"))
+            Run();
 
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
             Jump();
         }
+    }
+    private void Run()
+    {
 
-        Vector3 position = transform.position;
+      if (isGrounded == true) state = State.runPlayer;
 
-        position.x += Input.GetAxis("Horizontal") * speed;
+        Vector3 dir = transform.right * Input.GetAxis("Horizontal");
 
-        transform.position = position;
+        transform.position = Vector3.MoveTowards(transform.position, transform.position + dir, speed * Time.deltaTime);
 
+        spriteRenderer.flipX = dir.x < 0.0f;
 
-
-        if (Input.GetAxis("Horizontal") != 0)
-        {
-            if (Input.GetAxis("Horizontal") < 0)
-            {
-                spriteRenderer.flipX = true;
-            }
-            else if (Input.GetAxis("Horizontal") > 0)
-            {
-                spriteRenderer.flipX = false;
-            }
-            animator.SetInteger("State", 1);
-        }
-        else
-        {
-            animator.SetInteger("State", 0);
-        }
-
+     
+       
     }
 
     private void Jump()
@@ -68,19 +74,34 @@ public class Player : MonoBehaviour
 
         rigidbody2D.AddForce(transform.up * jumpForce, ForceMode2D.Impulse);
 
+
     }
 
-    public void AddCoid(int count)
+    private void CheckGround()
     {
-        score += count;
-        scoreText.text = score.ToString();
+        Collider2D[] collider = Physics2D.OverlapCircleAll(transform.position, 0.5f);
+        isGrounded = collider.Length > 1;
+
+       if (!isGrounded) state = State.jumpPlayer;
     }
 
-    public void OnCollisionEnter2D(Collision2D collision)
+    public enum State
     {
-        if (collision.gameObject.tag == "Ground")
-        {
-            isGrounded = true;
-        }
-    }      
+        idlePlayer,
+        runPlayer,
+        jumpPlayer,
+        climbPlayer     
+        
+           }
+
+    //public void AddCoid(int count)
+    //{
+    //    score += count;
+    //    scoreText.text = score.ToString();
+    //}
+
+   
+
+
+
 }

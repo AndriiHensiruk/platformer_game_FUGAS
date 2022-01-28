@@ -4,14 +4,22 @@ using UnityEngine;
 
 public class MainCamera : MonoBehaviour
 {
-    public Transform trackingObject;
-    int distanse = -10;
-    float lift = 1.5f;
+    [SerializeField] private Transform Player;
+    private Vector3 pos;
 
-    // Update is called once per frame
-    void Update()
+
+    private void Awake()
     {
-        transform.position = new Vector3(0, lift, distanse) + trackingObject.position;
-        transform.LookAt(trackingObject);
+        if (!Player)
+            Player = FindObjectOfType<Player>().transform;
+    }
+
+    private void Update()
+    {
+        pos = Player.position;
+        pos.z = -5f;
+
+        transform.position = Vector3.Lerp(transform.position, pos, Time.deltaTime);
+
     }
 }
