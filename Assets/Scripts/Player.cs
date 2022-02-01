@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-//using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 
 public class Player : MonoBehaviour
@@ -52,6 +52,11 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
             Jump();
+        }
+
+        if (transform.position.y < -30f)
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
     }
     private void Run()
