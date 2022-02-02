@@ -16,6 +16,7 @@ public class Player : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private Animator animator;
 
+   
     public static Player Instance { get; set; }
 
 
@@ -34,6 +35,7 @@ public class Player : MonoBehaviour
         rigidbody2D = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         animator = GetComponent<Animator>();
+       
     }
 
     private void FixedUpdate()
@@ -54,7 +56,7 @@ public class Player : MonoBehaviour
             Jump();
         }
 
-        if (transform.position.y < -30f)
+        if (transform.position.y < -10f)
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
@@ -105,7 +107,7 @@ public class Player : MonoBehaviour
     //    scoreText.text = score.ToString();
     //}
 
-   
+    
 
 
 
