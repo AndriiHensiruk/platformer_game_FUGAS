@@ -2,13 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 
-public class Player : MonoBehaviour
+public class Player : Entity
 {
     [SerializeField] private float speed =3f;
     [SerializeField] private float jumpForce = 8f;
-    [SerializeField] private int lives = 5;
+    [SerializeField] private int health;
+    //[SerializeField] private int lives = 3;
+
+    [SerializeField] private Image[] hearts;
+    [SerializeField] private Sprite aliveHeart;
+    [SerializeField] private Sprite deadHeart;
 
     private bool isGrounded; 
     private Rigidbody2D rigidbody2D;
@@ -16,6 +22,7 @@ public class Player : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private Animator animator;
 
+    public Joystick joystick;
    
     public static Player Instance { get; set; }
 
@@ -32,6 +39,9 @@ public class Player : MonoBehaviour
 
     private void Awake()
     {
+        lives = 3;
+        health = lives;
+        Instance = this;
         rigidbody2D = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         animator = GetComponent<Animator>();
@@ -48,10 +58,10 @@ public class Player : MonoBehaviour
     {
        if (isGrounded) state = State.idlePlayer;
 
-        if (Input.GetButton("Horizontal"))
+        if (joystick.Horizontal !=0)
             Run();
 
-        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
+        if (joystick.Vertical >0.5f && isGrounded)
         {
             Jump();
         }
@@ -60,26 +70,38 @@ public class Player : MonoBehaviour
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
+
+        if (health > lives)
+            health = lives;
+        for (int i=0; i<hearts.Length; i++)
+        {
+            if (i < health)
+                hearts[i].sprite = aliveHeart;
+            else hearts[i].sprite = deadHeart;
+
+            if (i < lives)
+                hearts[i].enabled = true;
+            else hearts[i].enabled = false;
+
+        }
     }
     private void Run()
     {
 
       if (isGrounded == true) state = State.runPlayer;
 
-        Vector3 dir = transform.right * Input.GetAxis("Horizontal");
+        Vector3 dir = transform.right * joystick.Horizontal;
 
         transform.position = Vector3.MoveTowards(transform.position, transform.position + dir, speed * Time.deltaTime);
 
         spriteRenderer.flipX = dir.x < 0.0f;
-
-     
        
     }
 
     private void Jump()
     {
 
-        rigidbody2D.AddForce(transform.up * jumpForce, ForceMode2D.Impulse);
+        rigidbody2D.velocity = Vector2.up * jumpForce;
 
 
     }
@@ -107,7 +129,16 @@ public class Player : MonoBehaviour
     //    scoreText.text = score.ToString();
     //}
 
-    
+    public override void GetDamage()
+    {
+        health -= 1;
+        if (health ==0)
+        {
+            foreach (var h in hearts)
+                h.sprite = deadHeart;
+            Die();
+        }
+    }
 
 
 

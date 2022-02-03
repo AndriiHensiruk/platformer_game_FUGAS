@@ -10,6 +10,7 @@ public class Finish : MonoBehaviour
         if (collision.tag == "Player")
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex +1);
+            PlayerPrefs.SetInt("PositionPlayer", 0);
             //Application.LoadLevel("Win");
         }
     }

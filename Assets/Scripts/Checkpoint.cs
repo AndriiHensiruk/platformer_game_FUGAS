@@ -12,7 +12,7 @@ public class Checkpoint : MonoBehaviour
         }
         else if (PlayerPrefs.GetInt("PositionPlayer") == 0)
         {
-            transform.position = new Vector2(-5.6f, -0.94f);
+            transform.position = new Vector2(-5.6f, -2.5f);
         }
 
         if (PlayerPrefs.GetInt("PositionPlayer") == 2)
