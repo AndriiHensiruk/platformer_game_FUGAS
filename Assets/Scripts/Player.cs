@@ -27,7 +27,7 @@ public class Player : Entity
     public static Player Instance { get; set; }
 
 
-    //public int score;
+    public int score;
     //public Text scoreText;
 
 
@@ -123,11 +123,11 @@ public class Player : Entity
         
            }
 
-    //public void AddCoid(int count)
-    //{
-    //    score += count;
-    //    scoreText.text = score.ToString();
-    //}
+    public void AddCoid(int count)
+    {
+        score += count;
+       // scoreText.text = score.ToString();
+    }
 
     public override void GetDamage()
     {

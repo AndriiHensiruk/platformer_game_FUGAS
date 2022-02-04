@@ -10,7 +10,7 @@ public class Coins : MonoBehaviour
     {
         if (collision.tag == "Player")
         {
-           // collision.GetComponent<Player>().AddCoid(count);
+            collision.GetComponent<Player>().AddCoid(count);
             Destroy(this.gameObject);
         }
     }
