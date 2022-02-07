@@ -45,6 +45,9 @@ public class Player : Entity
         rigidbody2D = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         animator = GetComponent<Animator>();
+
+       if (PlayerPrefs.HasKey("SaveCoint"))
+            score = PlayerPrefs.GetInt("SaveCoint"); 
        
     }
 
@@ -84,6 +87,8 @@ public class Player : Entity
             else hearts[i].enabled = false;
 
         }
+
+       
     }
     private void Run()
     {
@@ -126,6 +131,7 @@ public class Player : Entity
     public void AddCoid(int count)
     {
         score += count;
+        PlayerPrefs.SetInt("SaveCoint", count);
        // scoreText.text = score.ToString();
     }
 
