@@ -47,7 +47,7 @@ public class Player : Entity
         animator = GetComponent<Animator>();
 
        if (PlayerPrefs.HasKey("SaveCoint"))
-            score = PlayerPrefs.GetInt("SaveCoint"); 
+          score = PlayerPrefs.GetInt("SaveCoint"); 
        
     }
 
@@ -131,7 +131,7 @@ public class Player : Entity
     public void AddCoid(int count)
     {
         score += count;
-        PlayerPrefs.SetInt("SaveCoint", count);
+        PlayerPrefs.SetInt("SaveCoint", score);
        // scoreText.text = score.ToString();
     }
 
