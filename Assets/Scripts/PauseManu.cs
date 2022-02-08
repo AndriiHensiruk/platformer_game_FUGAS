@@ -49,5 +49,6 @@ public class PauseManu : MonoBehaviour
     {
         PlayerPrefs.SetInt("PositionPlayer", 0);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        Time.timeScale = 1f;
     }
 }
