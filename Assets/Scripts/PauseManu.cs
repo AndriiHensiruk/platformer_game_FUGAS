@@ -44,4 +44,10 @@ public class PauseManu : MonoBehaviour
         Time.timeScale = 1f;
         SceneManager.LoadScene("manuScena");
     }
+
+    public void RestartPlayer()
+    {
+        PlayerPrefs.SetInt("PositionPlayer", 0);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
 }
