@@ -7,14 +7,21 @@ using UnityEngine.UI;
 
 public class Player : Entity
 {
+    [SerializeField] private AudioSource jumpSound;
+    [SerializeField] private AudioSource coinsSound;
+    [SerializeField] private AudioSource anemuSound;
+
+
     [SerializeField] private float speed =3f;
     [SerializeField] private float jumpForce = 8f;
     [SerializeField] private int health;
-    //[SerializeField] private int lives = 3;
+   
 
     [SerializeField] private Image[] hearts;
     [SerializeField] private Sprite aliveHeart;
     [SerializeField] private Sprite deadHeart;
+
+    [SerializeField] GameObject GameOverScreen;
 
     private bool isGrounded; 
     private Rigidbody2D rigidbody2D;
@@ -71,7 +78,8 @@ public class Player : Entity
 
         if (transform.position.y < -10f)
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            Die();
+            GameOverScreen.SetActive(true);
         }
 
         if (health > lives)
@@ -100,14 +108,15 @@ public class Player : Entity
         transform.position = Vector3.MoveTowards(transform.position, transform.position + dir, speed * Time.deltaTime);
 
         spriteRenderer.flipX = dir.x < 0.0f;
-       
+
+        
     }
 
     private void Jump()
     {
 
         rigidbody2D.velocity = Vector2.up * jumpForce;
-
+        jumpSound.Play();
 
     }
 
@@ -132,17 +141,20 @@ public class Player : Entity
     {
         score += count;
         PlayerPrefs.SetInt("SaveCoint", score);
-       // scoreText.text = score.ToString();
+        // scoreText.text = score.ToString();
+        coinsSound.Play();
     }
 
     public override void GetDamage()
     {
         health -= 1;
+        anemuSound.Play();
         if (health ==0)
         {
             foreach (var h in hearts)
                 h.sprite = deadHeart;
             Die();
+            GameOverScreen.SetActive(true);
         }
     }
 
