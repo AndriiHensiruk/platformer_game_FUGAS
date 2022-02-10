@@ -19,6 +19,7 @@ public class LevelSelektor : MonoBehaviour
     public void Select( int numberInBuild)
     {
         SceneManager.LoadScene(numberInBuild);
+        PlayerPrefs.SetInt("PositionPlayer", 0);
     }
 
     // Update is called once per frame
