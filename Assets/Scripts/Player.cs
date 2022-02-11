@@ -22,6 +22,7 @@ public class Player : Entity
     [SerializeField] private Sprite deadHeart;
 
     [SerializeField] GameObject GameOverScreen;
+   
 
     private bool isGrounded; 
     private Rigidbody2D rigidbody2D;
@@ -155,6 +156,7 @@ public class Player : Entity
                 h.sprite = deadHeart;
             Die();
             GameOverScreen.SetActive(true);
+            score = 0;
         }
     }
 

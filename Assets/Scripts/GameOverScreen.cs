@@ -17,8 +17,9 @@ public class GameOverScreen : MonoBehaviour
 
     public void RestartPlayer()
     {
-        PlayerPrefs.SetInt("PositionPlayer", 0);
+       // PlayerPrefs.SetInt("PositionPlayer", 0);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         Time.timeScale = 1f;
+        PlayerPrefs.SetInt("SaveCoint", 0);
     }
 }
