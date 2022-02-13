@@ -21,5 +21,6 @@ public class GameOverScreen : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         Time.timeScale = 1f;
         PlayerPrefs.SetInt("SaveCoint", 0);
+        PlayerPrefs.SetInt("SaveHealse", 3);
     }
 }

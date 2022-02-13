@@ -55,8 +55,11 @@ public class Player : Entity
         animator = GetComponent<Animator>();
 
        if (PlayerPrefs.HasKey("SaveCoint"))
-          score = PlayerPrefs.GetInt("SaveCoint"); 
-       
+          score = PlayerPrefs.GetInt("SaveCoint");
+
+        if (PlayerPrefs.HasKey("SaveHealse"))
+            health = PlayerPrefs.GetInt("SaveHealse");
+
     }
 
     private void FixedUpdate()
@@ -149,6 +152,7 @@ public class Player : Entity
     public override void GetDamage()
     {
         health -= 1;
+        PlayerPrefs.SetInt("SaveHealse", health);
         anemuSound.Play();
         if (health ==0)
         {
