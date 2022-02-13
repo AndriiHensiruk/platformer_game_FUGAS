@@ -510,6 +510,11 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &76835718 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 361001068200071931, guid: 8548077d6b60ae7488044cb800b9f3c9, type: 3}
+  m_PrefabInstance: {fileID: 361001068289179343}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &122690395 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8629681581079023910, guid: 356091b3f698d4847b0bb24fe16774b5, type: 3}
@@ -1228,7 +1233,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -118.62, y: -40.13}
+  m_AnchoredPosition: {x: -118.619995, y: -40.130005}
   m_SizeDelta: {x: 233.23, y: 80.26}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!4 &348925860 stripped
@@ -2088,7 +2093,7 @@ Transform:
   - {fileID: 952978595}
   - {fileID: 1668336535}
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &901876812
 PrefabInstance:
@@ -3968,7 +3973,7 @@ Transform:
   - {fileID: 62689624}
   - {fileID: 8849424397000555785}
   m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1486134137
 GameObject:
@@ -4482,7 +4487,7 @@ Transform:
   - {fileID: 1175395940}
   - {fileID: 1093479928}
   m_Father: {fileID: 0}
-  m_RootOrder: 15
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1566740961
 PrefabInstance:
@@ -5305,7 +5310,7 @@ Transform:
   - {fileID: 7548488567711918732}
   - {fileID: 1945660896}
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1933307208
 PrefabInstance:
@@ -5864,7 +5869,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 361001068200071926, guid: 8548077d6b60ae7488044cb800b9f3c9, type: 3}
       propertyPath: m_RootOrder
-      value: 11
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 361001068200071926, guid: 8548077d6b60ae7488044cb800b9f3c9, type: 3}
       propertyPath: m_AnchorMax.x
@@ -6171,6 +6176,10 @@ PrefabInstance:
       propertyPath: aliveHeart
       value: 
       objectReference: {fileID: 21300000, guid: 588942ad760edd04ab5c971d48cc02ea, type: 3}
+    - target: {fileID: 5036487763227803190, guid: 360b06b5a7b9af04eae034058858f9b7, type: 3}
+      propertyPath: GameOverScreen
+      value: 
+      objectReference: {fileID: 76835718}
     - target: {fileID: 5036487763227803190, guid: 360b06b5a7b9af04eae034058858f9b7, type: 3}
       propertyPath: hearts.Array.size
       value: 3
